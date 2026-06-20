@@ -1,4 +1,6 @@
 
+import sys
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -6,17 +8,29 @@ import sentencepiece as spm
 
 from transformer_blocks import Block
 
-MODE = "train"
+if len(sys.argv) != 3:
+    print(
+        "Usage:\n"
+        "python tinygpt.py train bpe\n"
+        "python tinygpt.py generate bpe"
+    )
+    exit()
 
-# ==================================================
-# PILIH TOKENIZER
-# ==================================================
+MODE = sys.argv[1].lower()
+TOKENIZER_TYPE = sys.argv[2].lower()
 
-TOKENIZER_TYPE = "word"
-# pilihan:
-# "char"
-# "word"
-# "bpe"
+VALID_MODES = ["train", "generate"]
+VALID_TOKENIZERS = ["char", "word", "bpe"]
+
+if MODE not in VALID_MODES:
+    raise ValueError(
+        f"Mode harus salah satu dari {VALID_MODES}"
+    )
+
+if TOKENIZER_TYPE not in VALID_TOKENIZERS:
+    raise ValueError(
+        f"Tokenizer harus salah satu dari {VALID_TOKENIZERS}"
+    )
 
 # ==================================================
 # LOAD CORPUS
@@ -295,7 +309,9 @@ elif MODE == "generate":
 # GENERATE
 # ==================================================
 
-prompt = "lari merupakan"
+prompt = input(
+    "\nMasukkan prompt: "
+)
 
 context = torch.tensor(
     [encode(prompt)],
