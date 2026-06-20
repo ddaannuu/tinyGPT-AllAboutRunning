@@ -1,34 +1,34 @@
 # tinyGPT-AllAboutRunning
 
-A TinyGPT implementation trained on a custom corpus about running and athletics. This project compares multiple tokenization approaches to evaluate their impact on language modeling performance and text generation quality.
+Implementasi TinyGPT berbasis Transformer yang dilatih menggunakan corpus khusus bertema olahraga lari (running). Proyek ini bertujuan untuk membandingkan beberapa metode tokenisasi dan menganalisis pengaruhnya terhadap performa model bahasa dalam menghasilkan teks.
 
 ---
 
-## Overview
+## Deskripsi Proyek
 
-This project was developed as part of a Natural Language Processing (NLP) coursework assignment.
+Proyek ini dibuat sebagai tugas mata kuliah Natural Language Processing (NLP).
 
-The objective is to train a TinyGPT language model using a custom corpus focused on running and athletics while comparing different tokenization methods:
+Model TinyGPT dilatih menggunakan corpus bertema olahraga lari yang berisi lebih dari 2000 kata. Selanjutnya dilakukan perbandingan beberapa metode tokenisasi untuk mengetahui pengaruhnya terhadap proses pelatihan dan kualitas teks yang dihasilkan.
 
-- Word Tokenization
-- Character Tokenization
-- Byte Pair Encoding (BPE)
+Metode tokenisasi yang digunakan:
 
-The performance of each tokenizer is analyzed through training loss and generated text quality.
-
----
-
-## Objectives
-
-- Create a custom corpus containing more than 2000 words.
-- Train TinyGPT on the custom corpus.
-- Compare multiple tokenization approaches.
-- Analyze the impact of tokenization on model performance.
-- Generate text using trained language models.
+* Character Tokenization
+* Word Tokenization
+* Byte Pair Encoding (BPE)
 
 ---
 
-## Project Structure
+## Tujuan
+
+* Membangun corpus bertema olahraga lari.
+* Melatih model TinyGPT menggunakan corpus tersebut.
+* Membandingkan beberapa metode tokenisasi.
+* Menganalisis performa model berdasarkan hasil training.
+* Menghasilkan teks menggunakan model yang telah dilatih.
+
+---
+
+## Struktur Proyek
 
 ```text
 tinyGPT-AllAboutRunning/
@@ -40,50 +40,125 @@ tinyGPT-AllAboutRunning/
 ├── data/
 │   └── corpus.txt
 │
-├── experiments/
-│   ├── word_tokenization.ipynb
-│   ├── character_tokenization.ipynb
-│   └── bpe_tokenization.ipynb
-│
 ├── models/
-│   ├── word/
-│   ├── character/
-│   └── bpe/
+│   ├── char_model.pth
+│   ├── word_model.pth
+│   └── bpe_model.pth
 │
-├── results/
-│   ├── generated_text/
-│   ├── plots/
-│   └── comparison.csv
+├── tokenizer/
+│   ├── tokenizer.model
+│   └── tokenizer.vocab
 │
-└── report/
-    └── laporan.pdf
+└── src/
+    ├── tinygpt.py
+    └── transformer_blocks.py
 ```
 
 ---
 
-## Model Architecture
+## Arsitektur Model
 
-The project uses TinyGPT, a lightweight Transformer-based language model designed for next-token prediction tasks.
+Model menggunakan arsitektur TinyGPT yang terdiri dari:
 
-Main Components:
+* Token Embedding
+* Positional Embedding
+* Multi-Head Self Attention
+* Feed Forward Network
+* Layer Normalization
+* Language Modeling Head
 
-- Token Embedding
-- Positional Encoding
-- Multi-Head Self Attention
-- Feed Forward Network
-- Language Modeling Head
+Model digunakan untuk melakukan prediksi token berikutnya (next token prediction).
 
 ---
 
-## Analysis
+## Instalasi
 
-The comparison focuses on:
+Clone repository:
 
-- Vocabulary size
-- Training efficiency
-- Model convergence
-- Generated text quality
-- Handling of unseen words
+```bash
+git clone https://github.com/username/tinyGPT-AllAboutRunning.git
+cd tinyGPT-AllAboutRunning
+```
+
+Install dependency:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Cara Menjalankan Program
+
+Masuk ke folder source code:
+
+```bash
+cd src
+```
+
+### 1. Training Model
+
+#### Character Tokenization
+
+```bash
+python tinygpt.py train char
+```
+
+#### Word Tokenization
+
+```bash
+python tinygpt.py train word
+```
+
+#### BPE Tokenization
+
+```bash
+python tinygpt.py train bpe
+```
+
+Model hasil training akan disimpan pada folder:
+
+```text
+models/
+```
+
+---
+
+### 2. Generate Teks
+
+#### Generate menggunakan Character Tokenization
+
+```bash
+python tinygpt.py generate char
+```
+
+#### Generate menggunakan Word Tokenization
+
+```bash
+python tinygpt.py generate word
+```
+
+#### Generate menggunakan BPE Tokenization
+
+```bash
+python tinygpt.py generate bpe
+```
+
+Masukkan prompt ketika diminta:
+
+```text
+Masukkan prompt:
+lari merupakan
+```
+
+Contoh hasil keluaran:
+
+```text
+lari merupakan salah satu cabang olahraga yang paling tua
+dan paling populer di dunia. aktivitas ini telah dilakukan
+manusia sejak zaman prasejarah sebagai bagian dari kebutuhan
+untuk berburu, berpindah tempat, dan bertahan hidup.
+```
 
 ---
 
@@ -91,4 +166,3 @@ The comparison focuses on:
 
 Rifky Danu Asmoro
 
-Student Project – Natural Language Processing
